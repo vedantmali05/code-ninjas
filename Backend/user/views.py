@@ -32,17 +32,26 @@ class LoginUserView(generics.GenericAPIView):
 
         email = request.data.get("email")
         password = request.data.get("password")
-        print(email," ",password)
+        
         user = authenticate(username=email, password=password)
         if user is not None:
             tokens = get_tokens_for_user(user)
-            return Response({"message": "Login Successful", "tokens": tokens})
+            user_serializer = UserSerializer(user)
+            
+            # Include user details along with the tokens in the response
+            return Response({
+                "message": "Login Successful", 
+                "tokens": tokens, 
+                "user": user_serializer.data  # Include the serialized user data
+            })
         return Response({"error": "Invalid Credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class FoundItemListView(generics.ListAPIView):
     queryset = FoundItem.objects.all()
+    # return Response({"hello":"hello"})
     serializer_class = FoundItemSerializer
+    
 
 # Post a new found item
 class PostFoundItemView(APIView):
@@ -55,17 +64,16 @@ class PostFoundItemView(APIView):
             return Response({"message": "Found item posted successfully"}, status=201)
         return Response(serializer.errors, status=400)
     
+# List all LostItems
 class LostItemListView(generics.ListAPIView):
     queryset = LostItem.objects.all()
     serializer_class = LostItemSerializer
 
 # Post a new lost item
-class PostLostItemView(APIView):
+class PostLostItemView(generics.CreateAPIView):
+    queryset = LostItem.objects.all()
+    serializer_class = LostItemSerializer
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):
-        serializer = LostItemSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(lost_by=request.user)
-            return Response({"message": "Lost item posted successfully"}, status=201)
-        return Response(serializer.errors, status=400)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

@@ -8,7 +8,7 @@ const DEVMODE = true;
 
 const SignIn = () => {
 
-    const [email, setEmail] = useState("vedant@gmail.com")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("Pass@123")
 
     const navigate = useNavigate();

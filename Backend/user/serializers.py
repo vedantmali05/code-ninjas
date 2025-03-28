@@ -6,11 +6,16 @@ from .models import UserProfile ,FoundItem, LostItem
 class UserSerializer(serializers.ModelSerializer):
     phone_number = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)  # To confirm password
+    full_name = serializers.SerializerMethodField()  # To return full name
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'phone_number', 'password', 'password2']
+        fields = ['id', 'username', 'email', 'phone_number', 'full_name', 'password', 'password2']
         extra_kwargs = {'password': {'write_only': True}}
+
+    def get_full_name(self, obj):
+        # Ensure first_name and last_name are populated
+        return f"{obj.first_name or ''} {obj.last_name or ''}".strip()  
 
     def validate(self, data):
         if data['password'] != data['password2']:
