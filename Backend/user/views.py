@@ -12,6 +12,7 @@ from .models import FoundItem, LostItem
 from .serializers import FoundItemSerializer, LostItemSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
 
 # User Registration API
 
@@ -33,28 +34,30 @@ def get_tokens_for_user(user):
 # User Login API
 
 
-class LoginUserView(generics.GenericAPIView):
+class LoginUserView(GenericAPIView):
     def post(self, request):
-
         email = request.data.get("email")
         password = request.data.get("password")
-        print(email, " ", password)
+        
         user = authenticate(username=email, password=password)
         if user is not None:
-            tokens = get_tokens_for_user(user)
+            # Use the UserSerializer to serialize the user object
             user_serializer = UserSerializer(user)
-
+            tokens = get_tokens_for_user(user)
+            # Return the serialized user data along with the tokens
             return Response({
-                "message": "Login Successful",
+                "message": "Login Successful", 
                 "tokens": tokens,
-                "user": user_serializer.data
+                "user": user_serializer.data  # Add serialized user data here
             })
         return Response({"error": "Invalid Credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class FoundItemListView(generics.ListAPIView):
     queryset = FoundItem.objects.all()
+    # return Response({"hello":"hello"})
     serializer_class = FoundItemSerializer
+    
 
 # Post a new found item
 
@@ -63,20 +66,18 @@ class PostFoundItemView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        print(request.data)
         serializer = FoundItemSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(found_by=request.user)
             return Response({"message": "Found item posted successfully"}, status=201)
         return Response(serializer.errors, status=400)
-
-
+    
 class LostItemListView(generics.ListAPIView):
     queryset = LostItem.objects.all()
     serializer_class = LostItemSerializer
 
 # Post a new lost item
-
-
 class PostLostItemView(APIView):
     permission_classes = [IsAuthenticated]
 

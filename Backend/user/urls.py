@@ -9,7 +9,7 @@ urlpatterns = [
 
     
     # Found Item URLs
-    path('items/found/', FoundItemListView.as_view(), name='found-items'),  # List all found items
+    path(' ', FoundItemListView.as_view(), name='found-items'),  # List all found items
     path('items/found/post/', PostFoundItemView.as_view(), name='post-found-item'),  # Post a found item
 
     # Lost Item URLs

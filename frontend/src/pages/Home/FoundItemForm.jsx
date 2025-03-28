@@ -13,8 +13,7 @@ const FoundItemForm = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault()
 
-        navigate("/")
-        return;
+        
 
         if (
             !itemInfo.name ||
@@ -27,16 +26,16 @@ const FoundItemForm = () => {
         ) return;
 
         await apiRequest({
-            url: "http://127.0.0.1:8000/api/auth/register/",
+            url: "http://127.0.0.1:8000/api/items/found/post/",
             method: "POST",
             body: {
-                name: itemInfo.name,
+                title: itemInfo.name,
                 type: itemInfo.type,
-                date: itemInfo.date,
+                date_found: itemInfo.date,
                 time: itemInfo.time,
                 location: itemInfo.location,
                 img: itemInfo.img,
-                info: itemInfo.info,
+                description: itemInfo.info,
             },
             onSuccess: (data) => { navigate("/") },
             onError: (error) => console.log(error.message),
@@ -117,6 +116,7 @@ const FoundItemForm = () => {
                                     id={"found_item_img"}
                                     name={"found_item_img"}
                                     value={itemInfo.img || ""}
+                                    required={false}
                                     onChange={(e) => setItemInfo((data) =>
                                         ({ ...data, img: e.target.value })
                                     )}

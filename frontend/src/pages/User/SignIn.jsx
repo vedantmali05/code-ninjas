@@ -7,7 +7,7 @@ import { saveToLocalStorage } from "../../utils/browserStorage";
 
 const SignIn = () => {
 
-    const [email, setEmail] = useState("vedant@gmail.com")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("Pass@123")
 
     const navigate = useNavigate();
@@ -25,6 +25,7 @@ const SignIn = () => {
                 password: password,
             },
             onSuccess: (data) => {
+                console.log(data)
                 saveToLocalStorage("user", data.user)
                 navigate("/") },
             onError: (error) => console.log(error.message),
