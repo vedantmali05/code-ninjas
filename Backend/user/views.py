@@ -29,9 +29,10 @@ def get_tokens_for_user(user):
 # User Login API
 class LoginUserView(generics.GenericAPIView):
     def post(self, request):
+
         email = request.data.get("email")
         password = request.data.get("password")
-
+        print(email," ",password)
         user = authenticate(username=email, password=password)
         if user is not None:
             tokens = get_tokens_for_user(user)

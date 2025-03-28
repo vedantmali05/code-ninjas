@@ -1,4 +1,3 @@
-import { PropTypes } from "prop-types";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Input"
@@ -26,11 +25,12 @@ const CreateAccount = () => {
             url: "http://127.0.0.1:8000/api/auth/register/",
             method: "POST",
             body: {
-                signup_email: createAccountInfo.email,
-                signup_full_name: createAccountInfo.full_name,
-                signup_phone: createAccountInfo.phone_num,
-                signup_create_password: createAccountInfo.create_password,
-                signup_confirm_password: createAccountInfo.confirm_password,
+                username:createAccountInfo.email,
+                email: createAccountInfo.email,
+                name: createAccountInfo.full_name,
+                phone_number: createAccountInfo.phone_num,
+                password: createAccountInfo.create_password,
+                password2: createAccountInfo.confirm_password,
             },
             onSuccess: (data) => { navigate("/") },
             onError: (error) => console.log(error.message),

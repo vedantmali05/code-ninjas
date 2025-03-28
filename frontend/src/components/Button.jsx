@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
+
 import { forwardRef } from "react";
 
-const CTAButton = forwardRef(({
+const Button = forwardRef(({
     label,
     className = "",
     iconName,
@@ -19,16 +19,6 @@ const CTAButton = forwardRef(({
             {rightIcon && iconName && iconElem}
         </button>
     )
-})
+}) 
 
-CTAButton.propTypes = {
-    icon: PropTypes.string,
-    rightIcon: PropTypes.bool,
-    iconType: PropTypes.string,
-    label: PropTypes.string,
-    onClick: PropTypes.func,
-    className: PropTypes.string,
-};
-
-
-export default CTAButton;
+export default Button;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+
 
 const Input = ({
     // Core Input Attributes
@@ -100,56 +100,6 @@ const Input = ({
             <p className="help-text text-muted">{helpText}</p>
         </div>
     );
-};
-
-Input.propTypes = {
-    // Core Input Attributes
-    type: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    placeholder: PropTypes.string,
-    autoComplete: PropTypes.string,
-    autoFocus: PropTypes.bool,
-    required: PropTypes.bool,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-
-    // Validation
-    maxLength: PropTypes.number,
-    minLength: PropTypes.number,
-    pattern: PropTypes.string,
-    maxNumber: PropTypes.number,
-    minNumber: PropTypes.number,
-    step: PropTypes.number,
-
-    // Formatting & Behavior
-    allowOnlyNumbers: PropTypes.bool,
-    numberFormat: PropTypes.string,
-    transformText: PropTypes.func,
-    spellCheck: PropTypes.bool,
-
-    // Events
-    onChange: PropTypes.func,
-
-    // UI Enhancements
-    className: PropTypes.string,
-    multiline: PropTypes.bool,
-    clearable: PropTypes.bool,
-
-    // Icons & Buttons
-    leftIcon: PropTypes.node,
-    rightIcon: PropTypes.node,
-    leftButton: PropTypes.node,
-    rightButton: PropTypes.node,
-    leftButtonOnClick: PropTypes.func,
-    rightButtonOnClick: PropTypes.func,
-
-    // Messaging
-    helpText: PropTypes.string,
-    errorMessage: PropTypes.string,
-    warningMessage: PropTypes.string,
-    successMessage: PropTypes.string,
 };
 
 export default Input;
