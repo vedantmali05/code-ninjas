@@ -1,0 +1,68 @@
+/* Base */
+@import url("./base/variable.css");
+@import url("./base/reset.css");
+@import url("./base/typography.css");
+
+/* Components */
+@import url("./components/buttons.css");
+@import url("./components/tabs.css");
+@import url("./components/input.css");
+@import url("./components/steps.css");
+
+/* Layouts */
+@import url("./layouts/header.css");
+@import url("./layouts/navigation.css");
+
+/* Pages */
+@import url("./pages/auth.css");
+@import url("./pages/user.css");
+
+/* /////////////////////////
+  MAIN CONTAINERS
+///////////////////////// */
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+main .main-body {
+  height: calc(100vh - var(--header-height));
+  height: 100vh;
+  overflow: auto;
+  padding-bottom: 16rem;
+}
+
+@media screen and (min-width: 1024px) {
+  #root {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #root main {
+    flex: 1;
+  }
+}
+
+section.main-sec {
+  padding: 1.6rem;
+}
+
+@media screen and (min-width: 769px) {
+  section.main-sec {
+    padding: 1.6rem 3.2rem;
+  }
+}
+
+section.main-sec h2 {
+  font-size: var(--fs-600);
+  margin-bottom: 0.4rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 11;
+  background-color: hsl(var(--clr-white));
+  padding: 0.8rem 0;
+}
