@@ -1,9 +1,29 @@
 import RootHeader from "../../components/RootHeader"
 import Button from "../../components/Button";
 import Tabs from "../../components/Tabs"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../context/UserContext";
+import { getFromLocalStorage } from "../../utils/browserStorage";
 
 const Home = () => {
+
+    const { userInfo, setUserInfo } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let userData = getFromLocalStorage("user");
+        if (!userData) {
+            navigate("/signin");
+        } else {
+            setUserInfo(userData);
+        }
+    }, [navigate, setUserInfo]);
+
+    console.log(userInfo);
+    
+
+
     let lostItemCards = [
         {
             img: "image-placeholder.png",

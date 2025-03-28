@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { apiRequest } from "../../utils/api";
 
-const LostItemForm = () => {
+const FoundItemForm = () => {
 
     const [itemInfo, setItemInfo] = useState({});
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ const LostItemForm = () => {
         return;
 
         if (
-            !itemInfo.title ||
+            !itemInfo.name ||
             !itemInfo.type ||
             !itemInfo.date ||
             !itemInfo.time ||
@@ -30,7 +30,7 @@ const LostItemForm = () => {
             url: "http://127.0.0.1:8000/api/auth/register/",
             method: "POST",
             body: {
-                name: itemInfo.title,
+                name: itemInfo.name,
                 type: itemInfo.type,
                 date: itemInfo.date,
                 time: itemInfo.time,
@@ -53,25 +53,25 @@ const LostItemForm = () => {
 
                     {/* Reports */}
                     <section className="main-sec lost-item-form-sec">
-                        <h2>Register a new Lost Item</h2>
+                        <h2>Share a found item</h2>
 
                         <section className="sec-content">
                             <form onSubmit={(e) => { handleFormSubmit(e) }}>
 
                                 <Input
                                     label="Name of the Item"
-                                    id="lost_item_name"
-                                    name="lost_item_name"
-                                    value={itemInfo.title || ""}
+                                    id="found_item_name"
+                                    name="found_item_name"
+                                    value={itemInfo.name || ""}
                                     onChange={(e) => setItemInfo((data) =>
-                                        ({ ...data, title: e.target.value })
+                                        ({ ...data, name: e.target.value })
                                     )}
                                 />
 
                                 <Input
                                     label="Type of Item (e.g., Electronics, Clothes, etc.)"
-                                    id="lost_item_type"
-                                    name="lost_item_type"
+                                    id="found_item_type"
+                                    name="found_item_type"
                                     value={itemInfo.type || ""}
                                     onChange={(e) => setItemInfo((data) =>
                                         ({ ...data, type: e.target.value })
@@ -80,9 +80,9 @@ const LostItemForm = () => {
 
                                 <Input
                                     type="date"
-                                    label="Date of Loss"
-                                    id="lost_item_date"
-                                    name="lost_item_date"
+                                    label="Date Found"
+                                    id="found_item_date"
+                                    name="found_item_date"
                                     value={itemInfo.date || ""}
                                     onChange={(e) => setItemInfo((data) =>
                                         ({ ...data, date: e.target.value })
@@ -91,9 +91,9 @@ const LostItemForm = () => {
 
                                 <Input
                                     type="time"
-                                    label="Time of Loss"
-                                    id="lost_item_time"
-                                    name="lost_item_time"
+                                    label="Time Found"
+                                    id="found_item_time"
+                                    name="found_item_time"
                                     value={itemInfo.time || ""}
                                     onChange={(e) => setItemInfo((data) =>
                                         ({ ...data, time: e.target.value })
@@ -102,9 +102,9 @@ const LostItemForm = () => {
 
                                 <Input
                                     type="text"
-                                    label="Location"
-                                    id="lost_item_location"
-                                    name="lost_item_location"
+                                    label="Location Found"
+                                    id="found_item_location"
+                                    name="found_item_location"
                                     value={itemInfo.location || ""}
                                     onChange={(e) => setItemInfo((data) =>
                                         ({ ...data, location: e.target.value })
@@ -112,11 +112,10 @@ const LostItemForm = () => {
                                 />
 
                                 <Input
-                                    label="Image of Lost Item"
+                                    label="Image of Found Item"
                                     type="file"
-                                    required={false}
-                                    id={"lost_item_img"}
-                                    name={"lost_item_img"}
+                                    id={"found_item_img"}
+                                    name={"found_item_img"}
                                     value={itemInfo.img || ""}
                                     onChange={(e) => setItemInfo((data) =>
                                         ({ ...data, img: e.target.value })
@@ -126,15 +125,15 @@ const LostItemForm = () => {
                                 <Input
                                     type="text"
                                     label="Any additional information"
-                                    id="lost_item_info"
-                                    name="lost_item_info"
+                                    id="found_item_info"
+                                    name="found_item_info"
                                     value={itemInfo.info || ""}
                                     onChange={(e) => setItemInfo((data) =>
                                         ({ ...data, info: e.target.value })
                                     )}
                                 />
 
-                                <Button label="post" className="primary" />
+                                <Button label="Share" className="primary" />
 
                             </form>
                         </section>
@@ -148,4 +147,4 @@ const LostItemForm = () => {
 
 }
 
-export default LostItemForm;
+export default FoundItemForm;
