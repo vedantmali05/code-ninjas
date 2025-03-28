@@ -21,6 +21,10 @@ form {
   z-index: 11;
 }
 
+.input-box:has(input[type="file"], input[type="time"], input[type="date"]) label {
+  position: static;
+}
+
 .input-box.has-trail-item label {
   left: 3.7rem;
 }
