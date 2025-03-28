@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Input"
 import Button from "../../components/Button"
 import { apiRequest } from "../../utils/api";
-
-const DEVMODE = true;
+import { saveToLocalStorage } from "../../utils/browserStorage";
 
 const SignIn = () => {
 
@@ -15,8 +14,6 @@ const SignIn = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault()
-
-        
 
         if (!email || !password) return;
 
@@ -29,6 +26,7 @@ const SignIn = () => {
             },
             onSuccess: (data) => {
                 console.log(data)
+                saveToLocalStorage("user", data.user)
                 navigate("/") },
             onError: (error) => console.log(error.message),
         })
