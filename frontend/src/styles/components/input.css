@@ -1,0 +1,78 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.input-box {
+  position: relative;
+}
+
+.input-box label {
+  font-size: var(--fs-300);
+  margin-bottom: 0.4rem;
+  display: flex;
+  position: absolute;
+  color: hsl(var(--clr-neutral-800));
+  background-color: hsl(var(--clr-white));
+  left: 0.9rem;
+  top: 1.3rem;
+  padding: 0 0.4rem;
+  z-index: 11;
+}
+
+.input-box.has-trail-item label {
+  left: 3.7rem;
+}
+
+.input-box:has(input:focus) label,
+.input-box.filled label {
+  font-size: var(--fs-200);
+  top: -0.8rem;
+}
+
+.input-frame.text-input {
+  border: 1.5px solid hsl(var(--clr-neutral-400));
+  border-radius: 0.4rem;
+  overflow: hidden;
+  background-color: hsl(var(--clr-white));
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 1.2rem;
+  padding: 0 1.2rem;
+}
+
+.input-box.has-trail-item .input-frame.text-input {
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+.input-frame.text-input input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: var(--fs-400);
+  padding: 1rem 0;
+}
+
+.input-frame.text-input input:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.input-frame.text-input:has(input:hover) {
+  border-color: hsl(var(--clr-neutral-600));
+}
+
+.input-frame.text-input:has(input:focus) {
+  border-color: hsl(var(--clr-neutral-900));
+}
+
+.input-box p.help-text {
+  margin-top: 0.4rem;
+}
+
+.input-box p.help-text span {
+  color: hsl(var(--clr-neutral-600));
+}
