@@ -1,8 +1,8 @@
-import { PropTypes } from "prop-types";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Input"
 import Button from "../../components/Button"
+import { apiRequest } from "../../utils/api";
 
 const DEVMODE = true;
 
@@ -16,8 +16,7 @@ const SignIn = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault()
 
-        navigate("/")
-        return
+        
 
         if (!email || !password) return;
 
@@ -25,10 +24,12 @@ const SignIn = () => {
             url: "http://127.0.0.1:8000/api/auth/login/",
             method: "POST",
             body: {
-                signin_email: email,
-                signin_password: password,
+                email: email,
+                password: password,
             },
-            onSuccess: (data) => { navigate("/") },
+            onSuccess: (data) => {
+                console.log(data)
+                navigate("/") },
             onError: (error) => console.log(error.message),
         })
     }
